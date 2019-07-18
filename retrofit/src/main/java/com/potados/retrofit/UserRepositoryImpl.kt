@@ -9,6 +9,6 @@ class UserRepositoryImpl(private val service: DummyDataService) :
     }
 
     override fun getUserById(id: Int, callback: Callback<User>) {
-        service.getUser(id).enqueue(callback)
+        service.getUser(id.toString()).enqueue(callback)
     }
 }
