@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.fragment_two.view.*
 
 class TwoFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,9 +47,9 @@ class TwoFragment : Fragment() {
 
         @JvmStatic
         private fun newInstance(): TwoFragment {
-            instance = TwoFragment()
-
-            return instance!!
+            return TwoFragment().also {
+                instance = it
+            }
         }
     }
 }

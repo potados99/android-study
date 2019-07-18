@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             FRAG_TWO    -> TwoFragment.getInstance()
 
             else        -> throw InvalidParameterException("fragmentNum can be only 1 or 2.")
-        }
+    }
 
         supportFragmentManager
             .beginTransaction()

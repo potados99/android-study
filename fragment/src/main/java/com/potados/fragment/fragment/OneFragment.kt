@@ -9,22 +9,10 @@ import android.view.ViewGroup
 import com.potados.fragment.R
 import kotlinx.android.synthetic.main.fragment_one.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_TITLE = "arg_title"
 private const val ARG_TEXT = "arg_text"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [OneFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [OneFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class OneFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var title: String? = null
     private var text: String? = null
 
@@ -46,6 +34,10 @@ class OneFragment : Fragment() {
         }
     }
 
+
+
+
+
     companion object {
 
         private var instance: OneFragment? = null
@@ -60,14 +52,15 @@ class OneFragment : Fragment() {
         private fun newInstance(title: String, text: String): OneFragment {
             lastTitle = title
             lastText = text
-            instance = OneFragment().apply {
+
+            return OneFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_TITLE, title)
                     putString(ARG_TEXT, text)
                 }
+            }.also {
+                instance = it
             }
-
-            return instance!!
         }
     }
 }
