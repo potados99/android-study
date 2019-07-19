@@ -8,23 +8,38 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * 메인 액티비티에서 사용할 뷰모델
+ */
 class MainViewModel : ViewModel(), KoinComponent {
 
     private val todoRepo: TodoRepository by inject()
     private val userRepo: UserRepository by inject()
 
+    /**
+     * 액티비티에서 구독할 To-do 리스트
+     */
     val todos: MutableLiveData<List<Todo>> = MutableLiveData()
+
+    /**
+     * 액티비티에서 구독할 실패 정보
+     */
     val failure: MutableLiveData<String> = MutableLiveData()
 
-    val cachedUsers: MutableList<User> = mutableListOf()
+    /**
+     * User 객체 중 네트워크에서 가져온 것을 저장
+     */
+    private val cachedUsers: MutableList<User> = mutableListOf()
 
+    /**
+     * todos를 업데이트
+     */
     fun loadTodos() = todoRepo.getTodos(object: Callback<List<Todo>> {
         override fun onResponse(call: Call<List<Todo>>, response: Response<List<Todo>>) {
             if (!response.isSuccessful) return
 
             todos.value = response.body()?.shuffled()?.subList(0, 15)
 
-            // loadUsers()
             fillName()
         }
 
@@ -33,14 +48,14 @@ class MainViewModel : ViewModel(), KoinComponent {
         }
     })
 
+    /**
+     * todos의 각 아이템에 userName 속성 채우
+     */
     private fun fillName() {
-        /*
-        todos.value?.forEachIndexed { index, todo ->
-            todo.userName = users.value?.find { it.id == todo.userId }?.name ?: "-"
-        }
-        todos.value = todos.value
-        */
 
+        /**
+         * todos의 모든 아이템을 순회하며 userName 채우기
+         */
         todos.value?.forEach {
             val cachedName = cachedUsers.find { user -> user.id == it.userId }?.name
 

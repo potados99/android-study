@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.todo_item.view.*
 
 class TodoRecyclerViewAdapter(
@@ -28,6 +29,7 @@ class TodoRecyclerViewAdapter(
             titleTextView.text = source[position].title
             userTextView.text = source[position].userName
             doneCheckBox.isChecked = source[position].done
+
         }
     }
 
